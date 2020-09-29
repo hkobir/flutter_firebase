@@ -38,7 +38,6 @@ class _HomeScreeenState extends State<HomeScreeen>
             color: Colors.white,
           ),
         ),
-        centerTitle: true,
         leading: AnimatedBuilder(
           animation: _refreshController,
           child: IconButton(
@@ -57,16 +56,27 @@ class _HomeScreeenState extends State<HomeScreeen>
           },
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => Registration()),
-                  (route) => false);
-            },
-            icon: Icon(Icons.exit_to_app, size: 28, color: Colors.red[400]),
-          )
+          Row(children: [
+            IconButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Registration()),
+                    (route) => false);
+              },
+              icon: Icon(Icons.exit_to_app, size: 28, color: Colors.red[400]),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            IconButton(
+              onPressed: () {
+
+              },
+              icon: Icon(Icons.more_vert, size: 28, color: Colors.white),
+            ),
+          ])
         ],
       ),
       body: AllNotes(),
