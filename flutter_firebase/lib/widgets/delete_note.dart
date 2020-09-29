@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -18,6 +19,8 @@ class _DeleteNoteState extends State<DeleteNote> {
   Future<bool> deleteNote() async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     await firestore
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser.uid)
         .collection("notes")
         .doc(widget.noteId)
         .delete()
@@ -65,7 +68,9 @@ class _DeleteNoteState extends State<DeleteNote> {
                 Icons.picture_in_picture,
                 color: Colors.red,
               ),
-              SizedBox(width: 10,),
+              SizedBox(
+                width: 10,
+              ),
               Expanded(
                 child: Text(
                   "Are you sure to delete this note?",

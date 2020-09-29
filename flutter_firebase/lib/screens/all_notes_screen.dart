@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/widgets/delete_note.dart';
@@ -15,7 +16,11 @@ class _AllNotesState extends State<AllNotes> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection("notes").snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .collection("notes")
+          .snapshots(),
       builder: (context, querySnapshot) {
         if (querySnapshot.hasError) {
           Fluttertoast.showToast(msg: "Some error!");

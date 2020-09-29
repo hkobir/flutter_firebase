@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/models/note_model.dart';
@@ -17,7 +18,12 @@ class _AddNoteState extends State<AddNote> {
 
   Future<bool> insertNote(final note) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    var result = await firestore.collection("notes").add(note).catchError((e) {
+    var result = await firestore
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .collection("notes")
+        .add(note)
+        .catchError((e) {
       Fluttertoast.showToast(
           msg: e.toString(), toastLength: Toast.LENGTH_SHORT);
       setState(() {

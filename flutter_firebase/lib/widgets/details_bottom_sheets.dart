@@ -24,14 +24,18 @@ class _ShowDetailState extends State<ShowDetail> {
             style: TextStyle(
                 fontFamily: "montserrat",
                 fontSize: 16,
-                color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold),
+                color: Theme
+                    .of(context)
+                    .primaryColor, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 15,),
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: Theme.of(context).primaryColor,width: 0.5),
+              border: Border.all(color: Theme
+                  .of(context)
+                  .primaryColor, width: 0.5),
             ),
             child: Padding(
               padding: const EdgeInsets.all(10),
@@ -39,8 +43,8 @@ class _ShowDetailState extends State<ShowDetail> {
                 widget.details,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                    fontSize: 16,
-                    ),
+                  fontSize: 16,
+                ),
               ),
             ),
           ),

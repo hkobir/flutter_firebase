@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/models/note_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -21,6 +22,8 @@ class _UpdateNoteState extends State<UpdateNote> {
   Future<bool> updateNote(final note) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     await firestore
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser.uid)
         .collection("notes")
         .doc(widget.noteId)
         .update(note)
@@ -119,11 +122,9 @@ class _UpdateNoteState extends State<UpdateNote> {
                         return "Enter note details";
                       }
                     },
-
                     onChanged: (value) {
                       detailText = value;
                     },
-
                     decoration: InputDecoration(
                         labelText: "Note Details",
                         enabledBorder: OutlineInputBorder(
@@ -153,10 +154,8 @@ class _UpdateNoteState extends State<UpdateNote> {
                           showProgress = true;
                         });
                         if (_formKey.currentState.validate()) {
-                          final Note note = Note(
-                              title: titleText,
-                              details: detailText
-                          );
+                          final Note note =
+                              Note(title: titleText, details: detailText);
                           bool result = await updateNote(note.noteModelToMap());
                           if (result) {
                             Fluttertoast.showToast(

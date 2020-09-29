@@ -9,7 +9,24 @@ class HomeScreeen extends StatefulWidget {
   _HomeScreeenState createState() => _HomeScreeenState();
 }
 
-class _HomeScreeenState extends State<HomeScreeen> {
+class _HomeScreeenState extends State<HomeScreeen>
+    with SingleTickerProviderStateMixin {
+  AnimationController _refreshController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _refreshController =
+        AnimationController(duration: Duration(seconds: 2), vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +39,22 @@ class _HomeScreeenState extends State<HomeScreeen> {
           ),
         ),
         centerTitle: true,
-        leading: Icon(
-          Icons.refresh,
-          color: Colors.lightGreen,
+        leading: AnimatedBuilder(
+          animation: _refreshController,
+          child: IconButton(
+              onPressed: () {
+                _refreshController.forward(from: 0);
+              },
+              icon: Icon(
+                Icons.refresh,
+                color: Colors.lightGreen,
+              )),
+          builder: (context, _widget) {
+            return Transform.rotate(
+              angle: _refreshController.value * 6.3,
+              child: _widget,
+            );
+          },
         ),
         actions: [
           IconButton(
@@ -35,10 +65,7 @@ class _HomeScreeenState extends State<HomeScreeen> {
                   MaterialPageRoute(builder: (context) => Registration()),
                   (route) => false);
             },
-            icon: Icon(
-              Icons.exit_to_app,size: 28,
-              color: Colors.red[400]
-            ),
+            icon: Icon(Icons.exit_to_app, size: 28, color: Colors.red[400]),
           )
         ],
       ),
