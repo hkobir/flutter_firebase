@@ -2,12 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_firebase/widgets/delete_note.dart';
 import 'package:flutter_firebase/widgets/details_bottom_sheets.dart';
 import 'package:flutter_firebase/widgets/update_note.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 class AllNotes extends StatefulWidget {
+
+
   @override
   _AllNotesState createState() => _AllNotesState();
 }
@@ -74,7 +76,7 @@ class _AllNotesState extends State<AllNotes> {
               },
               child: Card(
                 elevation: 3,
-                color: Colors.grey[200],
+                color: Colors.grey[100],
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

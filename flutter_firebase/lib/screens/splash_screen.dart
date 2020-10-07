@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/screens/home_screen.dart';
+import 'package:flutter_firebase/screens/main_screen.dart';
 import 'package:flutter_firebase/screens/registration_screen.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -13,19 +14,17 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
-      FirebaseAuth.instance.authStateChanges().listen((User user){
-        if(user == null){
+      FirebaseAuth.instance.authStateChanges().listen((User user) {
+        if (user == null) {
           //signed out state
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Registration()));
-        }
-        else{
+        } else {
           //signed in state
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomeScreeen()));
+              context, MaterialPageRoute(builder: (context) => MainScreen()));
         }
       });
-
     });
   }
 
@@ -48,14 +47,16 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 20,
               ),
               Text(
-                "Daily Note",
+                "Mind It",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: "montserrat",
                     fontSize: 22,
                     color: CupertinoColors.white),
               ),
-              SizedBox(height: 100,),
+              SizedBox(
+                height: 100,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 140),
                 child: LinearProgressIndicator(
