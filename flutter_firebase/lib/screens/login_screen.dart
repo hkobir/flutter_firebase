@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/screens/home_screen.dart';
+import 'package:flutter_firebase/screens/main_screen.dart';
+import 'package:flutter_firebase/screens/registration_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -36,6 +38,16 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         title: Text("Daily Note"),
         centerTitle: true,
+        actions: [
+          FlatButton(
+            onPressed: () => Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Registration())),
+            child: Text(
+              "SignUp",
+              style: TextStyle(color: Colors.white),
+            ),
+          )
+        ],
       ),
       body: ModalProgressHUD(
         inAsyncCall: showProgress,
@@ -131,7 +143,7 @@ class _LoginState extends State<Login> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreeen()),
+                                builder: (context) => MainScreen()),
                             (route) => false);
                       } else {
                         print("error");

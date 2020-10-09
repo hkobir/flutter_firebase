@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/screens/login_screen.dart';
 import 'package:flutter_firebase/screens/main_screen.dart';
-import 'package:flutter_firebase/screens/registration_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (user == null) {
           //signed out state
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Registration()));
+              context, MaterialPageRoute(builder: (context) => Login()));
         } else {
           //signed in state
           Navigator.pushReplacement(

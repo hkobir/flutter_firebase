@@ -7,9 +7,8 @@ import 'package:flutter_firebase/widgets/delete_note.dart';
 import 'package:flutter_firebase/widgets/details_bottom_sheets.dart';
 import 'package:flutter_firebase/widgets/update_note.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 class AllNotes extends StatefulWidget {
-
-
   @override
   _AllNotesState createState() => _AllNotesState();
 }
@@ -72,6 +71,7 @@ class _AllNotesState extends State<AllNotes> {
                     builder: (context) => ShowDetail(
                           title: snapshot[index].data()['title'],
                           details: snapshot[index].data()['details'],
+                          date: snapshot[index].data()['date'],
                         ));
               },
               child: Card(
@@ -109,6 +109,13 @@ class _AllNotesState extends State<AllNotes> {
                           style: TextStyle(
                             fontSize: 15,
                           )),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        snapshot[index].data()['date'],
+                        style: TextStyle(fontSize: 15, color: Colors.grey),
+                      ),
                       SizedBox(
                         height: 15,
                       ),

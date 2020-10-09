@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/models/note_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class AddNote extends StatefulWidget {
@@ -149,8 +150,10 @@ class _AddNoteState extends State<AddNote> {
                           showProgress = true;
                         });
                         if (_formKey.currentState.validate()) {
+                          String date =
+                              DateFormat.yMMMd().format(DateTime.now());
                           final Note note =
-                              Note(title: title, details: details);
+                              Note(title: title, details: details, date: date);
                           bool result = await insertNote(note.noteModelToMap());
                           if (result) {
                             Fluttertoast.showToast(
